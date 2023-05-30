@@ -3,7 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 # creating the engine
-engine = create_engine('sqlite:///:memory:')
+engine = create_engine('sqlite:///books.db')
 
 # Creating the session
 Session = sessionmaker(bind=engine)
@@ -21,7 +21,20 @@ class Books(Base):
     genre = Column(String(50))
     publication_year = Column(Integer)
 
-Base.metadata.create_all(engine)
+    
 
 
- 
+# Base.metadata.create_all(engine)
+
+# Inserting data into the table
+#Creating instances of the table class
+
+books1 = Books(title="How to live", genre = "Life", publication_year = 2000)
+
+# Add data to session
+
+session.add(books1)
+
+# Commit changes to the db
+session.commit()
+
