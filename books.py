@@ -30,13 +30,16 @@ class Books(Base):
 #Creating instances of the table class
 
 books1 = Books(title="How to live", genre = "Life", publication_year = 2000)
+books2 = Books(title="How to eat", genre = "Food", publication_year = 2015)
+books3 = Books(title="How to survive", genre = "Survival", publication_year = 1999)
+
+
 
 # Add data to session
 
-session.add(books1)
-
-# Commit changes to the db
-session.commit()
+# session.add_all([books1, books2, books3])
+# # Commit changes to the db
+# session.commit()
 
 # Reading data
 
@@ -44,3 +47,15 @@ books = session.query(Books)
 
 for book in books:
     print(book.title, book.genre, book.publication_year)
+
+
+# Updating data
+book = session.query(Books).filter(Books.genre == "Life").first()
+# book.genre = "Food"
+# session.commit()
+
+
+# Deleting data
+book = session.query(Books).filter(Books.id == 4).first()
+session.delete(book)
+session.commit()
