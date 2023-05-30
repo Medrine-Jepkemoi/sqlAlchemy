@@ -21,7 +21,7 @@ class Books(Base):
     genre = Column(String(50))
     publication_year = Column(Integer)
 
-    
+
 
 
 # Base.metadata.create_all(engine)
@@ -38,3 +38,9 @@ session.add(books1)
 # Commit changes to the db
 session.commit()
 
+# Reading data
+
+books = session.query(Books)
+
+for book in books:
+    print(book.title, book.genre, book.publication_year)
